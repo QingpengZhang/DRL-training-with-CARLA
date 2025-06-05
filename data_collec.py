@@ -242,7 +242,6 @@ def main():
         surv_camera = world.spawn_actor(surv_camera_bp, surv_camera_transform, attach_to=ego_vehicle, attachment_type=carla.AttachmentType.SpringArm)
         image_queue_dis = []
         image_queue_sav = []
-        # TODO: : 重置回调函数，防止数据丢失
         # surv_camera.listen(lambda image: image_queue_dis.append(process_img(image)[0]) if len(image_queue_dis) < 2 else image_queue_dis.pop(0))
         surv_camera.listen(lambda image: try_add_to_queue(image_queue_dis, image_queue_sav, process_img(image)[0], process_img(image)[1]))
 
@@ -330,6 +329,15 @@ def main():
     if ego_vehicle is not None:
         ego_vehicle.destroy()
     print("Data collection completed.")
+
+# TODO: : spawn NPCs for more realistic scenarios
+def spawn_npc():
+    """
+    Spawn NPCs in the CARLA world.
+    This function can be extended to spawn different types of vehicles or pedestrians.
+    """
+    
+    pass
 
 def process_img(image):
     #image.convert(carla.ColorConverter.Raw)
